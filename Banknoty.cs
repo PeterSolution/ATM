@@ -61,5 +61,41 @@ namespace appbankomat
         {
             banks.Insert(5, amount);
         }
+        public int ilosc500()
+        {
+            return banks[0] * 500;
+        }
+        public int ilosc200()
+        {
+            return banks[1] * 200;
+        }
+        public int ilosc100()
+        {
+            return banks[2] * 100;
+        }
+        public int ilosc50()
+        {
+            return banks[3] * 50;
+        }
+        public int ilosc20()
+        {
+            return banks[4] * 20;
+        }
+        public int ilosc10()
+        {
+            return banks[5] * 10;
+        }
+        public int ilebanknotow()
+        {
+            int ile;
+            ile = banks[0] ;
+            ile += banks[1] ;
+            ile += banks[2] ;
+            ile += banks[3] ;
+            ile += banks[4] ;
+            ile += banks[5] ;
+            return ile;
+        }
+
     }
 }

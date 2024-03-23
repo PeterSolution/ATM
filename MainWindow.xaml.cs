@@ -47,7 +47,7 @@ namespace appbankomat
             lastvar50 = int.Parse(tx50.Text);
             lastvar20 = int.Parse(tx20.Text);
             lastvar10 = int.Parse(tx10.Text);
-            
+            kontostan.Content = "Stan konta: " + srodki.ToString();
 
         }
 
@@ -57,66 +57,106 @@ namespace appbankomat
             {
                 string pieniadze = t1.Text;
                 int ilosc = int.Parse(pieniadze);
-                if(banknoty.cash() >= ilosc)
+                if(banknoty.cash() < ilosc)
                 {
                     errormessage.Visibility = Visibility.Visible;
-                    errormessage.Content = "Brak wystarczajacej ilosc banknotow";
+                    errormessage.Content = "Brak wystarczajacej ilosc banknotow do zrealizowania tej operacji";
                 }
                 else
                 {
                     errormessage.Visibility= Visibility.Hidden;
                 }
-                while (ilosc >= 10&banknoty.cash()>=ilosc)
+                int iterationcount = 0;
+                int checkiteration = banknoty.ilebanknotow();
+                while (ilosc >= 10&&banknoty.cash()>=ilosc&&srodki>=ilosc&&iterationcount<banknoty.ilebanknotow())
                 {
-                    if (ilosc >= 500)
+                    if (ilosc >= 500&&int.Parse(tx500.Text)>0)
                     {
                         p500++;
+                        int poom = int.Parse(tx500.Text);
+                        int poom12 = poom - 1;
+                        tx500.Text=poom12.ToString();
                         ilosc = ilosc - 500;
                     }
                     else
                     {
-                        if (ilosc >= 200)
+                        if (ilosc >= 200 && int.Parse(tx200.Text) > 0)
                         {
 
                             p200++;
+                            int poom = int.Parse(tx200.Text);
+                            int poom12 = poom - 1;
+                            tx200.Text = poom12.ToString();
                             ilosc = ilosc - 200;
                         }
                         else
                         {
-                            if (ilosc >= 100)
+                            if (ilosc >= 100 && int.Parse(tx100.Text) > 0)
                             {
                                 p100++;
+                                int poom = int.Parse(tx100.Text);
+                                int poom12 = poom - 1;
+                                tx100.Text = poom12.ToString();
                                 ilosc = ilosc - 100;
                             }
                             else
                             {
-                                if (ilosc >= 50)
+                                if (ilosc >= 50 && int.Parse(tx50.Text) > 0)
                                 {
 
                                     p50++;
+                                    int poom = int.Parse(tx50.Text);
+                                    int poom12 = poom - 1;
+                                    tx50.Text = poom12.ToString();
                                     ilosc = ilosc - 50;
                                 }
                                 else
                                 {
-                                    if (ilosc >= 20)
+                                    if (ilosc >= 20 && int.Parse(tx20.Text) > 0)
                                     {
                                         p20++;
+                                        int poom = int.Parse(tx20.Text);
+                                        int poom12 = poom - 1;
+                                        tx20.Text = poom12.ToString();
                                         ilosc = ilosc - 20;
                                     }
                                     else
                                     {
-                                        if (ilosc >= 10)
+                                        if (int.Parse(tx10.Text) > 0)
                                         {
-                                            p10++;
-                                            ilosc = ilosc - 10;
+                                            if (ilosc >= 10)
+                                            {
+                                                p10++;
+                                                int poom = int.Parse(tx10.Text);
+                                                int poom12 = poom - 1;
+                                                tx10.Text = poom12.ToString();
+                                                ilosc = ilosc - 10;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            errorbrak.Visibility = Visibility.Visible;
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                    
+                    iterationcount++;
+                    
                 }
+                if (iterationcount == checkiteration)
+                {
+                    errorbrak.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    errorbrak.Visibility = Visibility.Hidden;
+                }
+                iterationcount = 0;
                 kontostan.Content = "Stan konta: " + srodki.ToString();
+
                 pieniadzeWyp.Content = "Wypłacono: \n" + p500 + " banknotow 500 \n" + p200 + " banknotow 200 \n" + p100 + " banknotow 100 \n" + p50 + " banknotow 50 \n" + p20 + " banknotow 20 \n" + p10 + " banknotow 10 \n";
             }
         }
@@ -127,7 +167,7 @@ namespace appbankomat
             {
                 int wplata = int.Parse(t2.Text);
                 srodki = srodki+ wplata;
-                kontostan.Content = "Stan konta" + srodki.ToString() ;
+                kontostan.Content = "Stan konta " + srodki.ToString() ;
             }
         }
 
