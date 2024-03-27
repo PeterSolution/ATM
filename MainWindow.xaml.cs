@@ -68,6 +68,14 @@ namespace appbankomat
                 }
                 int iterationcount = 0;
                 int checkiteration = banknoty.ilebanknotow();
+                if (ilosc > srodki)
+                {
+                    brakpien.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    brakpien.Visibility= Visibility.Hidden;
+                }
                 while (ilosc >= 10&&banknoty.cash()>=ilosc&&srodki>=ilosc&&iterationcount<banknoty.ilebanknotow())
                 {
                     if (ilosc >= 500&&int.Parse(tx500.Text)>0)
@@ -77,6 +85,7 @@ namespace appbankomat
                         int poom12 = poom - 1;
                         tx500.Text=poom12.ToString();
                         ilosc = ilosc - 500;
+                        srodki=srodki- 500;
                     }
                     else
                     {
@@ -88,6 +97,7 @@ namespace appbankomat
                             int poom12 = poom - 1;
                             tx200.Text = poom12.ToString();
                             ilosc = ilosc - 200;
+                            srodki = srodki - 200;
                         }
                         else
                         {
@@ -98,6 +108,7 @@ namespace appbankomat
                                 int poom12 = poom - 1;
                                 tx100.Text = poom12.ToString();
                                 ilosc = ilosc - 100;
+                                srodki = srodki - 100;
                             }
                             else
                             {
@@ -109,6 +120,7 @@ namespace appbankomat
                                     int poom12 = poom - 1;
                                     tx50.Text = poom12.ToString();
                                     ilosc = ilosc - 50;
+                                    srodki = srodki - 50;
                                 }
                                 else
                                 {
@@ -119,6 +131,7 @@ namespace appbankomat
                                         int poom12 = poom - 1;
                                         tx20.Text = poom12.ToString();
                                         ilosc = ilosc - 20;
+                                        srodki = srodki - 20;
                                     }
                                     else
                                     {
@@ -131,6 +144,7 @@ namespace appbankomat
                                                 int poom12 = poom - 1;
                                                 tx10.Text = poom12.ToString();
                                                 ilosc = ilosc - 10;
+                                                srodki = srodki - 10;
                                             }
                                         }
                                         else
@@ -144,7 +158,8 @@ namespace appbankomat
                     }
                     
                     iterationcount++;
-                    
+
+                    kontostan.Content = "Stan konta: " + srodki.ToString();
                 }
                 if (iterationcount == checkiteration)
                 {

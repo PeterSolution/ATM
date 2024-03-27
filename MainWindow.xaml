@@ -30,6 +30,7 @@
         <Label Content="10:" HorizontalAlignment="Left" Margin="687,337,0,0" VerticalAlignment="Top"/>
         <Label x:Name="errormessage" Content="Label" HorizontalAlignment="Left" Margin="47,61,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <Label x:Name="errorbrak" Content="Brak Banknotów" HorizontalAlignment="Left" Margin="289,147,0,0" VerticalAlignment="Top" Height="36" Width="111" Visibility="Hidden"/>
+        <Label x:Name="brakpien" Content="Brak pieniedzy na koncie" HorizontalAlignment="Left" Margin="296,235,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 
     </Grid>
 </Window>
